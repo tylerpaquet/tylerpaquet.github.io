@@ -170,12 +170,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_chips__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/chips */ "./node_modules/@angular/material/esm5/chips.es5.js");
 /* harmony import */ var _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/button-toggle */ "./node_modules/@angular/material/esm5/button-toggle.es5.js");
 /* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm5/select.es5.js");
+/* harmony import */ var _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shopping-cart/shopping-cart.component */ "./src/app/shopping-cart/shopping-cart.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -201,7 +203,8 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _toolbar_and_sidenav_responsive_toolbar_and_sidenav_responsive_component__WEBPACK_IMPORTED_MODULE_3__["ToolbarAndSidenavResponsiveComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
-                _about_about_component__WEBPACK_IMPORTED_MODULE_11__["AboutComponent"]
+                _about_about_component__WEBPACK_IMPORTED_MODULE_11__["AboutComponent"],
+                _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_16__["ShoppingCartComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -304,6 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../about/about.component */ "./src/app/about/about.component.ts");
+/* harmony import */ var _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shopping-cart/shopping-cart.component */ "./src/app/shopping-cart/shopping-cart.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -314,10 +318,12 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
-    { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_3__["AboutComponent"] }
+    { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_3__["AboutComponent"] },
+    { path: 'cart', component: _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_4__["ShoppingCartComponent"] }
 ];
 var RoutingModule = /** @class */ (function () {
     function RoutingModule() {
@@ -335,6 +341,69 @@ var RoutingModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shopping-cart/shopping-cart.component.css":
+/*!***********************************************************!*\
+  !*** ./src/app/shopping-cart/shopping-cart.component.css ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shopping-cart/shopping-cart.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/shopping-cart/shopping-cart.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Shopping Cart</h1>\n"
+
+/***/ }),
+
+/***/ "./src/app/shopping-cart/shopping-cart.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/shopping-cart/shopping-cart.component.ts ***!
+  \**********************************************************/
+/*! exports provided: ShoppingCartComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShoppingCartComponent", function() { return ShoppingCartComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ShoppingCartComponent = /** @class */ (function () {
+    function ShoppingCartComponent() {
+    }
+    ShoppingCartComponent.prototype.ngOnInit = function () {
+    };
+    ShoppingCartComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-shopping-cart',
+            template: __webpack_require__(/*! ./shopping-cart.component.html */ "./src/app/shopping-cart/shopping-cart.component.html"),
+            styles: [__webpack_require__(/*! ./shopping-cart.component.css */ "./src/app/shopping-cart/shopping-cart.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ShoppingCartComponent);
+    return ShoppingCartComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/toolbar-and-sidenav-responsive/toolbar-and-sidenav-responsive.component.html":
 /*!**********************************************************************************************!*\
   !*** ./src/app/toolbar-and-sidenav-responsive/toolbar-and-sidenav-responsive.component.html ***!
@@ -342,7 +411,7 @@ var RoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"{{theme}}\">\r\n  <div class=\"example-container\" [class.example-is-mobile]=\"mobileQuery.matches\">\r\n    <mat-toolbar class=\"example-toolbar\">\r\n      <div>\r\n        <button mat-icon-button (click)=\"snav.toggle()\"><mat-icon>menu</mat-icon></button>\r\n        <h1 class=\"example-app-name\">Responsive App</h1>\r\n      </div>\r\n      <div>\r\n        <mat-button-toggle-group name=\"theme\" aria-label=\"Theme Style\" value=\"light\">\r\n          <mat-button-toggle value=\"light\" (change)=\"changeTheme('light')\">Light</mat-button-toggle>\r\n          <mat-button-toggle value=\"dark\" (change)=\"changeTheme('dark')\">Dark</mat-button-toggle>\r\n        </mat-button-toggle-group>\r\n      </div>\r\n      <div class=\"toolbarMenu\" *ngIf=\"!mobileQuery.matches\">\r\n        <mat-nav-list class=\"toolbarNavList\">\r\n          <a id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n        </mat-nav-list>\r\n      </div>\r\n    </mat-toolbar>\r\n\r\n    <mat-sidenav-container class=\"example-sidenav-container\"\r\n                           [style.marginTop.px]=\"mobileQuery.matches ? 56 : 0\">\r\n      <mat-sidenav #snav\r\n                   [opened]=\"mobileQuery.matches ? 'false' : 'true'\"\r\n                   [mode]=\"mobileQuery.matches ? 'over' : 'side'\"\r\n                   [fixedInViewport]=\"mobileQuery.matches\" fixedTopGap=\"56\">\r\n        <mat-nav-list class=\"sidenavNavList\">\r\n          <a class=\"testnav\" id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a class=\"testnav\" routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n          <!--<a mat-list-item routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a mat-list-item routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>-->\r\n        </mat-nav-list>\r\n      </mat-sidenav>\r\n\r\n\r\n      <mat-sidenav-content>\r\n        <div class=\"content-container\">\r\n          <router-outlet></router-outlet>\r\n        </div>\r\n      </mat-sidenav-content>\r\n    </mat-sidenav-container>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"{{theme}}\">\r\n  <div class=\"example-container\" [class.example-is-mobile]=\"mobileQuery.matches\">\r\n    <mat-toolbar class=\"example-toolbar\">\r\n      <div>\r\n        <button mat-icon-button (click)=\"snav.toggle()\"><mat-icon>menu</mat-icon></button>\r\n        <h1 class=\"example-app-name\">Responsive App</h1>\r\n      </div>\r\n      <div>\r\n        <mat-button-toggle-group name=\"theme\" aria-label=\"Theme Style\" value=\"light\">\r\n          <mat-button-toggle value=\"light\" (change)=\"changeTheme('light')\">Light</mat-button-toggle>\r\n          <mat-button-toggle value=\"dark\" (change)=\"changeTheme('dark')\">Dark</mat-button-toggle>\r\n        </mat-button-toggle-group>\r\n      </div>\r\n      <div class=\"toolbarMenu\" *ngIf=\"!mobileQuery.matches\">\r\n        <mat-nav-list class=\"toolbarNavList\">\r\n          <a id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n        </mat-nav-list>\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n      <div *ngIf=\"mobileQuery.matches\">\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n    </mat-toolbar>\r\n\r\n    <mat-sidenav-container class=\"example-sidenav-container\"\r\n                           [style.marginTop.px]=\"mobileQuery.matches ? 56 : 0\">\r\n      <mat-sidenav #snav\r\n                   [opened]=\"mobileQuery.matches ? 'false' : 'true'\"\r\n                   [mode]=\"mobileQuery.matches ? 'over' : 'side'\"\r\n                   [fixedInViewport]=\"mobileQuery.matches\" fixedTopGap=\"56\">\r\n        <mat-nav-list class=\"sidenavNavList\">\r\n          <a class=\"testnav\" id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a class=\"testnav\" routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n          <!--<a mat-list-item routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a mat-list-item routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>-->\r\n        </mat-nav-list>\r\n      </mat-sidenav>\r\n\r\n\r\n      <mat-sidenav-content>\r\n        <div class=\"content-container\">\r\n          <router-outlet></router-outlet>\r\n        </div>\r\n      </mat-sidenav-content>\r\n    </mat-sidenav-container>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
