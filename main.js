@@ -410,8 +410,11 @@ var ProductsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./products.component.html */ "./src/app/products/products.component.html"),
             styles: [__webpack_require__(/*! ./products.component.scss */ "./src/app/products/products.component.scss")]
         }),
-        __metadata("design:paramtypes", [angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"], _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["MediaMatcher"],
-            _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_3__["ShoppingCartServiceService"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"]])
+        __metadata("design:paramtypes", [angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"],
+            _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["MediaMatcher"],
+            _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_3__["ShoppingCartServiceService"],
+            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"]])
     ], ProductsComponent);
     return ProductsComponent;
 }());
@@ -542,7 +545,7 @@ var ShoppingCartServiceService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Shopping Cart</h1>\n<!--<ul>\n  <li *ngFor=\"let product of data\">{{product.name}}</li>\n</ul>-->\n\n<mat-list role=\"list\">\r\n  <mat-list-item role=\"listitem\" *ngFor=\"let product of cart\">\r\n    {{product.name}}\r\n    <button class=\"remove-product\" mat-button (click)=\"removeSingle(product)\">Remove</button>\r\n    <div class=\"price\">{{product.price | currency}}</div>\r\n  </mat-list-item>\r\n  <mat-divider></mat-divider>\r\n  <mat-list-item>\r\n    Total<div class=\"price\">{{this.total | currency}}</div>\r\n  </mat-list-item>\r\n</mat-list>\n<button mat-raised-button (click)=\"removeAll()\">Remove All Items</button>\n"
+module.exports = "<h1>Shopping Cart</h1>\n<!--<ul>\n  <li *ngFor=\"let product of data\">{{product.name}}</li>\n</ul>-->\n\n<mat-list role=\"list\">\r\n  <mat-list-item *ngIf=\"!cart.length > 0\">\r\n    There are no items in the shopping cart\r\n  </mat-list-item>\r\n  <mat-list-item role=\"listitem\" *ngFor=\"let product of cart\">\r\n    {{product.name}}\r\n    <button class=\"remove-product\" mat-button (click)=\"removeSingle(product)\">Remove</button>\r\n    <div class=\"price\">{{product.price | currency}}</div>\r\n  </mat-list-item>\r\n  <mat-divider></mat-divider>\r\n  <mat-list-item role=\"listitem\">\r\n    Total<div class=\"price\">{{this.total | currency}}</div>\r\n  </mat-list-item>\r\n</mat-list>\n<button mat-raised-button (click)=\"removeAll()\">Remove All Items</button>\n"
 
 /***/ }),
 
@@ -569,6 +572,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShoppingCartComponent", function() { return ShoppingCartComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shopping-cart-service.service */ "./src/app/shopping-cart-service.service.ts");
+/* harmony import */ var _snackbar_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../snackbar.service */ "./src/app/snackbar.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -580,9 +584,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var ShoppingCartComponent = /** @class */ (function () {
-    function ShoppingCartComponent(shoppingCartService) {
+    function ShoppingCartComponent(shoppingCartService, snackBarService) {
         this.shoppingCartService = shoppingCartService;
+        this.snackBarService = snackBarService;
     }
     ShoppingCartComponent.prototype.ngOnInit = function () {
         this.cart = this.shoppingCartService.cart;
@@ -591,6 +597,11 @@ var ShoppingCartComponent = /** @class */ (function () {
     ShoppingCartComponent.prototype.removeAll = function () {
         this.shoppingCartService.removeAll();
         this.ngOnInit();
+        /*
+         * Getting error saying this.snackBarService.snackBarNotification is not a function
+         * Need to investigate...
+         */
+        //this.snackBarService.snackBarNotification("hello");
     };
     ShoppingCartComponent.prototype.removeSingle = function (product) {
         this.shoppingCartService.removeSingle(product);
@@ -602,9 +613,53 @@ var ShoppingCartComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./shopping-cart.component.html */ "./src/app/shopping-cart/shopping-cart.component.html"),
             styles: [__webpack_require__(/*! ./shopping-cart.component.scss */ "./src/app/shopping-cart/shopping-cart.component.scss")]
         }),
-        __metadata("design:paramtypes", [_shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_1__["ShoppingCartServiceService"]])
+        __metadata("design:paramtypes", [_shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_1__["ShoppingCartServiceService"],
+            _snackbar_service__WEBPACK_IMPORTED_MODULE_2__["SnackbarService"]])
     ], ShoppingCartComponent);
     return ShoppingCartComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/snackbar.service.ts":
+/*!*************************************!*\
+  !*** ./src/app/snackbar.service.ts ***!
+  \*************************************/
+/*! exports provided: SnackbarService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SnackbarService", function() { return SnackbarService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm5/snack-bar.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SnackbarService = /** @class */ (function () {
+    function SnackbarService(snackBar) {
+        this.snackBar = snackBar;
+    }
+    SnackbarService.prototype.snackBarNotification = function (message) {
+        this.snackBar.open(message);
+    };
+    SnackbarService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
+    ], SnackbarService);
+    return SnackbarService;
 }());
 
 
