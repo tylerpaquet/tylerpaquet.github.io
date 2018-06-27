@@ -119,23 +119,33 @@ module.exports = "<app-toolbar-and-sidenav-responsive></app-toolbar-and-sidenav-
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(changeDetectorRef, media) {
         this.title = 'app';
+        this.mobileQuery = media.matchMedia('(max-width: 600px)');
+        this._mobileQueryListener = function () { return changeDetectorRef.detectChanges(); };
+        this.mobileQuery.addListener(this._mobileQueryListener);
     }
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"], _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["MediaMatcher"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -171,6 +181,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/button-toggle */ "./node_modules/@angular/material/esm5/button-toggle.es5.js");
 /* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm5/select.es5.js");
 /* harmony import */ var _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shopping-cart/shopping-cart.component */ "./src/app/shopping-cart/shopping-cart.component.ts");
+/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/esm5/card.es5.js");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm5/snack-bar.es5.js");
+/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/divider */ "./node_modules/@angular/material/esm5/divider.es5.js");
+/* harmony import */ var angularfire2__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! angularfire2 */ "./node_modules/angularfire2/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _products_products_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./products/products.component */ "./src/app/products/products.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -194,6 +211,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+// FirebaseImplementation
+// install firebase angularfire2 --save
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -204,7 +230,8 @@ var AppModule = /** @class */ (function () {
                 _toolbar_and_sidenav_responsive_toolbar_and_sidenav_responsive_component__WEBPACK_IMPORTED_MODULE_3__["ToolbarAndSidenavResponsiveComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
                 _about_about_component__WEBPACK_IMPORTED_MODULE_11__["AboutComponent"],
-                _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_16__["ShoppingCartComponent"]
+                _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_16__["ShoppingCartComponent"],
+                _products_products_component__WEBPACK_IMPORTED_MODULE_23__["ProductsComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -218,9 +245,14 @@ var AppModule = /** @class */ (function () {
                 _routing_routing_module__WEBPACK_IMPORTED_MODULE_12__["RoutingModule"],
                 _angular_material_chips__WEBPACK_IMPORTED_MODULE_13__["MatChipsModule"],
                 _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_14__["MatButtonToggleModule"],
-                _angular_material_select__WEBPACK_IMPORTED_MODULE_15__["MatSelectModule"]
+                _angular_material_select__WEBPACK_IMPORTED_MODULE_15__["MatSelectModule"],
+                angularfire2__WEBPACK_IMPORTED_MODULE_20__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_22__["environment"].firebase),
+                angularfire2_database__WEBPACK_IMPORTED_MODULE_21__["AngularFireDatabaseModule"],
+                _angular_material_card__WEBPACK_IMPORTED_MODULE_17__["MatCardModule"],
+                _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_18__["MatSnackBarModule"],
+                _angular_material_divider__WEBPACK_IMPORTED_MODULE_19__["MatDividerModule"]
             ],
-            providers: [],
+            providers: [{ provide: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_18__["MAT_SNACK_BAR_DEFAULT_OPTIONS"], useValue: { duration: 2500 } }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
@@ -249,7 +281,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Home</h1>\r\n\r\n<mat-chip-list>\r\n  <mat-chip color=\"primary\" selected=\"true\">Primary fish</mat-chip>\r\n  <mat-chip color=\"accent\" selected=\"true\">Accent fish</mat-chip>\r\n  <mat-chip color=\"warn\" selected=\"true\">Warn fish</mat-chip>\r\n</mat-chip-list>\r\n\r\n<p>\r\n  Still need to fix routing/component exception issue.. When an exception happens on a component,\r\n  the component isn't destroyed upon navigating to a new route causing a visual appending of components.\r\n  <a href=\"https://github.com/angular/angular/pull/20719\">Here is a potential fix</a>\r\n</p>\r\n\r\n<!--\r\n    The below element is used to fix strange scroll behavior on mobile display (viewed from\r\n    a desktop when shrinking the window size. Seems to be an issue with mat-chip-list\r\n    -->\r\n<p style=\"visibility: hidden\">a</p>\r\n"
+module.exports = "<h1>Home</h1>\r\n\r\n<mat-chip-list>\r\n  <mat-chip color=\"primary\" selected=\"true\">Primary color</mat-chip>\r\n  <mat-chip color=\"accent\" selected=\"true\">Accent color</mat-chip>\r\n  <mat-chip color=\"warn\" selected=\"true\">Warn color</mat-chip>\r\n</mat-chip-list>\r\n\r\n<p>\r\n  Still need to fix routing/component exception issue.. When an exception happens on a component,\r\n  the component isn't destroyed upon navigating to a new route causing a visual appending of components.\r\n  <a href=\"https://github.com/angular/angular/pull/20719\">Here is a potential fix</a>\r\n</p>\r\n\r\n<!--\r\n    The below element is used to fix strange scroll behavior on mobile display (viewed from\r\n    a desktop when shrinking the window size. Seems to be an issue with mat-chip-list\r\n    -->\r\n<p style=\"visibility: hidden\">a</p>\r\n"
 
 /***/ }),
 
@@ -294,6 +326,100 @@ var HomeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/products/products.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/products/products.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Products</h1>\r\n<div class=\"productContainer\" [class.example-is-mobile]=\"mobileQuery.matches\">\r\n  <mat-card *ngFor=\"let product of products\" class=\"productCard\">\r\n    <mat-card-header>\r\n      <mat-card-title>{{product.name}}</mat-card-title>\r\n      <mat-card-subtitle>{{product.price | currency}}</mat-card-subtitle>\r\n    </mat-card-header>\r\n    <button mat-raised-button (click)=\"addToService(product)\">add to cart</button>\r\n  </mat-card>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/products/products.component.scss":
+/*!**************************************************!*\
+  !*** ./src/app/products/products.component.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "mat-card {\n  margin: 5px; }\n\n.productContainer {\n  padding: 5px;\n  display: -ms-grid;\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }\n"
+
+/***/ }),
+
+/***/ "./src/app/products/products.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/products/products.component.ts ***!
+  \************************************************/
+/*! exports provided: ProductsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductsComponent", function() { return ProductsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shopping-cart-service.service */ "./src/app/shopping-cart-service.service.ts");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm5/snack-bar.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+// Responsive mobile query
+
+
+// FirebaseImplementation
+
+
+
+var ProductsComponent = /** @class */ (function () {
+    function ProductsComponent(db, changeDetectorRef, media, shoppingCartService, snackBar) {
+        // FirebaseImplementation
+        var _this = this;
+        this.shoppingCartService = shoppingCartService;
+        this.snackBar = snackBar;
+        db.list('/products').valueChanges().subscribe(function (products) {
+            _this.products = products;
+            console.log(_this.products);
+        });
+        // Responsive mobile query
+        this.mobileQuery = media.matchMedia('(max-width: 600px)');
+        this._mobileQueryListener = function () { return changeDetectorRef.detectChanges(); };
+        this.mobileQuery.addListener(this._mobileQueryListener);
+    }
+    ProductsComponent.prototype.addToService = function (product) {
+        this.shoppingCartService.addToCart(product);
+        this.snackBarNotification("Item was added to the shopping cart");
+    };
+    ProductsComponent.prototype.snackBarNotification = function (message) {
+        this.snackBar.open(message);
+    };
+    ProductsComponent.prototype.ngOnInit = function () {
+    };
+    ProductsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-products',
+            template: __webpack_require__(/*! ./products.component.html */ "./src/app/products/products.component.html"),
+            styles: [__webpack_require__(/*! ./products.component.scss */ "./src/app/products/products.component.scss")]
+        }),
+        __metadata("design:paramtypes", [angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"], _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["MediaMatcher"],
+            _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_3__["ShoppingCartServiceService"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__["MatSnackBar"]])
+    ], ProductsComponent);
+    return ProductsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/routing/routing.module.ts":
 /*!*******************************************!*\
   !*** ./src/app/routing/routing.module.ts ***!
@@ -309,6 +435,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../about/about.component */ "./src/app/about/about.component.ts");
 /* harmony import */ var _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shopping-cart/shopping-cart.component */ "./src/app/shopping-cart/shopping-cart.component.ts");
+/* harmony import */ var _products_products_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../products/products.component */ "./src/app/products/products.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -320,11 +447,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
     { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_3__["AboutComponent"] },
-    { path: 'cart', component: _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_4__["ShoppingCartComponent"] }
+    { path: 'cart', component: _shopping_cart_shopping_cart_component__WEBPACK_IMPORTED_MODULE_4__["ShoppingCartComponent"] },
+    { path: 'products', component: _products_products_component__WEBPACK_IMPORTED_MODULE_5__["ProductsComponent"] }
 ];
 var RoutingModule = /** @class */ (function () {
     function RoutingModule() {
@@ -342,14 +471,67 @@ var RoutingModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/shopping-cart/shopping-cart.component.css":
-/*!***********************************************************!*\
-  !*** ./src/app/shopping-cart/shopping-cart.component.css ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/app/shopping-cart-service.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/shopping-cart-service.service.ts ***!
+  \**************************************************/
+/*! exports provided: ShoppingCartServiceService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = ""
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShoppingCartServiceService", function() { return ShoppingCartServiceService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var ShoppingCartServiceService = /** @class */ (function () {
+    function ShoppingCartServiceService() {
+        this.total = 0;
+        this.cart = [];
+    }
+    // Used to insert items into the shopping cart
+    ShoppingCartServiceService.prototype.addToCart = function (product) {
+        this.cart.push(product);
+        this.total = 0;
+        this.calculateTotal();
+    };
+    // Used to remove all items from the shopping cart
+    ShoppingCartServiceService.prototype.removeAll = function () {
+        this.cart = [];
+        this.total = 0;
+    };
+    // Used to remove a single item from the shopping cart
+    ShoppingCartServiceService.prototype.removeSingle = function (product) {
+        console.log(this.cart);
+        this.cart.splice(this.cart.indexOf(product), 1);
+        this.calculateTotal();
+    };
+    // Used to remove all of a single item (will be used when item quantity is incorporated)
+    ShoppingCartServiceService.prototype.removeSingleAll = function (product) {
+        this.cart = this.cart.filter(function (obj) {
+            return obj.name !== product.name;
+        });
+        this.calculateTotal();
+    };
+    // Calculates the current total of items of currently in the shopping cart
+    ShoppingCartServiceService.prototype.calculateTotal = function () {
+        this.total = 0;
+        for (var i = 0; i < this.cart.length; i++) {
+            this.total += this.cart[i].price;
+        }
+    };
+    ShoppingCartServiceService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
+    ], ShoppingCartServiceService);
+    return ShoppingCartServiceService;
+}());
+
+
 
 /***/ }),
 
@@ -360,7 +542,18 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Shopping Cart</h1>\n"
+module.exports = "<h1>Shopping Cart</h1>\n<!--<ul>\n  <li *ngFor=\"let product of data\">{{product.name}}</li>\n</ul>-->\n\n<mat-list role=\"list\">\r\n  <mat-list-item role=\"listitem\" *ngFor=\"let product of cart\">\r\n    {{product.name}}\r\n    <button class=\"remove-product\" mat-button (click)=\"removeSingle(product)\">Remove</button>\r\n    <div class=\"price\">{{product.price | currency}}</div>\r\n  </mat-list-item>\r\n  <mat-divider></mat-divider>\r\n  <mat-list-item>\r\n    Total<div class=\"price\">{{this.total | currency}}</div>\r\n  </mat-list-item>\r\n</mat-list>\n<button mat-raised-button (click)=\"removeAll()\">Remove All Items</button>\n"
+
+/***/ }),
+
+/***/ "./src/app/shopping-cart/shopping-cart.component.scss":
+/*!************************************************************!*\
+  !*** ./src/app/shopping-cart/shopping-cart.component.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "mat-list-item {\n  display: flex; }\n\n.price {\n  flex: 1;\n  display: flex;\n  justify-content: flex-end; }\n\n.remove-product {\n  margin-left: 10px; }\n"
 
 /***/ }),
 
@@ -375,6 +568,7 @@ module.exports = "<h1>Shopping Cart</h1>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShoppingCartComponent", function() { return ShoppingCartComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shopping-cart-service.service */ "./src/app/shopping-cart-service.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -385,18 +579,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ShoppingCartComponent = /** @class */ (function () {
-    function ShoppingCartComponent() {
+    function ShoppingCartComponent(shoppingCartService) {
+        this.shoppingCartService = shoppingCartService;
     }
     ShoppingCartComponent.prototype.ngOnInit = function () {
+        this.cart = this.shoppingCartService.cart;
+        this.total = this.shoppingCartService.total;
+    };
+    ShoppingCartComponent.prototype.removeAll = function () {
+        this.shoppingCartService.removeAll();
+        this.ngOnInit();
+    };
+    ShoppingCartComponent.prototype.removeSingle = function (product) {
+        this.shoppingCartService.removeSingle(product);
+        this.ngOnInit();
     };
     ShoppingCartComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-shopping-cart',
             template: __webpack_require__(/*! ./shopping-cart.component.html */ "./src/app/shopping-cart/shopping-cart.component.html"),
-            styles: [__webpack_require__(/*! ./shopping-cart.component.css */ "./src/app/shopping-cart/shopping-cart.component.css")]
+            styles: [__webpack_require__(/*! ./shopping-cart.component.scss */ "./src/app/shopping-cart/shopping-cart.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_1__["ShoppingCartServiceService"]])
     ], ShoppingCartComponent);
     return ShoppingCartComponent;
 }());
@@ -412,7 +618,7 @@ var ShoppingCartComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"{{theme}}\">\r\n  <div class=\"example-container\" [class.example-is-mobile]=\"mobileQuery.matches\">\r\n    <mat-toolbar class=\"example-toolbar\">\r\n      <div>\r\n        <button mat-icon-button (click)=\"snav.toggle()\"><mat-icon>menu</mat-icon></button>\r\n        <h1 *ngIf=\"!mobileQuery.matches\" class=\"example-app-name\">Responsive App</h1>\r\n      </div>\r\n      <div class=\"themeSwitcher\">\r\n        <mat-button-toggle-group name=\"theme\" aria-label=\"Theme Style\" value=\"light\">\r\n          <mat-button-toggle value=\"light\" (change)=\"changeTheme('light')\">Light</mat-button-toggle>\r\n          <mat-button-toggle value=\"dark\" (change)=\"changeTheme('dark')\">Dark</mat-button-toggle>\r\n        </mat-button-toggle-group>\r\n      </div>\r\n      <div class=\"toolbarMenu\" *ngIf=\"!mobileQuery.matches\">\r\n        <mat-nav-list class=\"toolbarNavList\">\r\n          <a routerLink=\"/home\">Home</a>\r\n          <a routerLink=\"/about\">About</a>\r\n        </mat-nav-list>\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n      <div *ngIf=\"mobileQuery.matches\">\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n    </mat-toolbar>\r\n\r\n    <mat-sidenav-container class=\"example-sidenav-container\"\r\n                           [style.marginTop.px]=\"mobileQuery.matches ? 56 : 0\">\r\n      <mat-sidenav #snav\r\n                   [opened]=\"mobileQuery.matches ? 'false' : 'true'\"\r\n                   [mode]=\"mobileQuery.matches ? 'over' : 'side'\"\r\n                   [fixedInViewport]=\"mobileQuery.matches\" fixedTopGap=\"56\">\r\n        <mat-nav-list class=\"sidenavNavList\">\r\n          <a class=\"testnav\" id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a class=\"testnav\" routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n          <!--<a mat-list-item routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a mat-list-item routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>-->\r\n        </mat-nav-list>\r\n      </mat-sidenav>\r\n\r\n\r\n      <mat-sidenav-content>\r\n        <div class=\"content-container\">\r\n          <router-outlet></router-outlet>\r\n        </div>\r\n      </mat-sidenav-content>\r\n    </mat-sidenav-container>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"{{theme}}\">\r\n  <div class=\"example-container\" [class.example-is-mobile]=\"mobileQuery.matches\">\r\n    <mat-toolbar class=\"example-toolbar\">\r\n      <div>\r\n        <button mat-icon-button (click)=\"snav.toggle()\"><mat-icon>menu</mat-icon></button>\r\n        <h1 *ngIf=\"!mobileQuery.matches\" class=\"example-app-name\">Responsive App</h1>\r\n      </div>\r\n      <div class=\"themeSwitcher\">\r\n        <mat-button-toggle-group name=\"theme\" aria-label=\"Theme Style\" value=\"light\">\r\n          <mat-button-toggle value=\"light\" (change)=\"changeTheme('light')\">Light</mat-button-toggle>\r\n          <mat-button-toggle value=\"dark\" (change)=\"changeTheme('dark')\">Dark</mat-button-toggle>\r\n        </mat-button-toggle-group>\r\n      </div>\r\n      <div class=\"toolbarMenu\" *ngIf=\"!mobileQuery.matches\">\r\n        <mat-nav-list class=\"toolbarNavList\">\r\n          <a routerLink=\"/home\">Home</a>\r\n          <a routerLink=\"/products\">Products</a>\r\n          <a routerLink=\"/about\">About</a>\r\n        </mat-nav-list>\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n      <div *ngIf=\"mobileQuery.matches\">\r\n        <button mat-icon-button routerLink=\"/cart\"><mat-icon>shopping_cart</mat-icon></button>\r\n      </div>\r\n    </mat-toolbar>\r\n\r\n    <mat-sidenav-container class=\"example-sidenav-container\"\r\n                           [style.marginTop.px]=\"mobileQuery.matches ? 56 : 0\">\r\n      <mat-sidenav #snav\r\n                   [opened]=\"mobileQuery.matches ? 'false' : 'true'\"\r\n                   [mode]=\"mobileQuery.matches ? 'over' : 'side'\"\r\n                   [fixedInViewport]=\"mobileQuery.matches\" fixedTopGap=\"56\">\r\n        <mat-nav-list class=\"sidenavNavList\">\r\n          <a class=\"testnav\" id=\"firstnav\" routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n          <a class=\"testnav\" routerLink=\"/products\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Products</a>\r\n          <a class=\"testnav\" routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>\r\n          <!--<a mat-list-item routerLink=\"/home\" (click)=\"mobileQuery.matches ? snav.close() : ''\">Home</a>\r\n  <a mat-list-item routerLink=\"/about\" (click)=\"mobileQuery.matches ? snav.close() : ''\">About</a>-->\r\n        </mat-nav-list>\r\n      </mat-sidenav>\r\n\r\n\r\n      <mat-sidenav-content>\r\n        <div class=\"content-container\">\r\n          <router-outlet></router-outlet>\r\n        </div>\r\n      </mat-sidenav-content>\r\n    </mat-sidenav-container>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -439,6 +645,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToolbarAndSidenavResponsiveComponent", function() { return ToolbarAndSidenavResponsiveComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
+/* harmony import */ var _shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shopping-cart-service.service */ "./src/app/shopping-cart-service.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -448,6 +655,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -477,7 +685,8 @@ var ToolbarAndSidenavResponsiveComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-toolbar-and-sidenav-responsive',
             template: __webpack_require__(/*! ./toolbar-and-sidenav-responsive.component.html */ "./src/app/toolbar-and-sidenav-responsive/toolbar-and-sidenav-responsive.component.html"),
-            styles: [__webpack_require__(/*! ./toolbar-and-sidenav-responsive.component.scss */ "./src/app/toolbar-and-sidenav-responsive/toolbar-and-sidenav-responsive.component.scss")]
+            styles: [__webpack_require__(/*! ./toolbar-and-sidenav-responsive.component.scss */ "./src/app/toolbar-and-sidenav-responsive/toolbar-and-sidenav-responsive.component.scss")],
+            providers: [_shopping_cart_service_service__WEBPACK_IMPORTED_MODULE_2__["ShoppingCartServiceService"]]
         }),
         __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"], _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["MediaMatcher"]])
     ], ToolbarAndSidenavResponsiveComponent);
@@ -502,7 +711,15 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false
+    production: false,
+    firebase: {
+        apiKey: "AIzaSyDZGDQAnBMX0TWLv7XnoW1aDrxFu7AVwAg",
+        authDomain: "responsivesidenavproject.firebaseapp.com",
+        databaseURL: "https://responsivesidenavproject.firebaseio.com",
+        projectId: "responsivesidenavproject",
+        storageBucket: "responsivesidenavproject.appspot.com",
+        messagingSenderId: "861154334558"
+    }
 };
 /*
  * In development mode, to ignore zone related error stack frames such as
