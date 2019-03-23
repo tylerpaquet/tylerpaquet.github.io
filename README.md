@@ -1,1 +1,0 @@
-# tylerpaquet.github.io
